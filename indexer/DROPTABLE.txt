@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS art20_base_kv;
+DROP TABLE IF EXISTS art20_kv;
+DROP TABLE IF EXISTS artscription_base_kv;
+DROP TABLE IF EXISTS artscription_execution_kv;
+DROP TABLE IF EXISTS artscription_object_kv;
+DROP TABLE IF EXISTS block_sync;
