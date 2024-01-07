@@ -1,8 +1,7 @@
 export default async function handler(req, res) {
     const { id } = req.query;
-    const host = process.env.REST_HOST || 'http://localhost';
-    const port = process.env.REST_PORT || 3000;
-    const targetUrl = `${host}:${port}/artscriptionDetail?id=${id}`;
+    const host = process.env.REST_HOST || 'http://localhost:3000';
+    const targetUrl = `${host}/getLast50Artscription`;
 
     try {
         const apiRes = await fetch(targetUrl, {
