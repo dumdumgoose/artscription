@@ -1,10 +1,9 @@
 import express, { Request, Response } from 'express';
 import { service } from './service';
 import { backend } from './backend';
-
+import cors from 'cors';
 
 const app: express.Application = express();
-
 
 (async () => {
     await backend.init()
@@ -13,6 +12,12 @@ const app: express.Application = express();
     service.setArtscriptionModule(backend.getArtscriptionModule()!);
     service.setArt20Module(backend.getArt20Module()!);
 })();
+
+app.use(cors({
+    origin: 'https://galxe.com',
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type']
+}));
 
 app.get('/', async (req: Request, res: Response) => {
     try {
