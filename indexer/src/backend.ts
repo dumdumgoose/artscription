@@ -7,7 +7,7 @@ import { ArtscriptionModule } from './inscription';
 import {Art20Error} from "./errors";
 
 
-const web3 = new Web3('https://testnet-rpc4.artela.network');
+const web3 = new Web3(process.env.CHAIN_RPC || 'https://betanet-rpc1.artela.network');
 
 class Backend {
     static readonly PG_KEY_LAST_BLOCK_NUMBER: string = "PG_KEY_LAST_BLOCK_NUMBER";
