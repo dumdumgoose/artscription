@@ -1,8 +1,8 @@
 // pages/api/proxy.js
 export default async function handler(req, res) {
-    const host = process.env.REST_HOST || 'localhost';
+    const host = process.env.REST_HOST || 'http://localhost';
     const port = process.env.REST_PORT || 3000;
-    const targetUrl = `http://${host}:${port}/getLast50Artscription`;
+    const targetUrl = `${host}:${port}/getLast50Artscription`;
 
     console.log("targetUrl:" + targetUrl);
 

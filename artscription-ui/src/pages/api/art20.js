@@ -1,10 +1,10 @@
 export default async function handler(req, res) {
 
-    const host = process.env.REST_HOST || 'localhost';
+    const host = process.env.REST_HOST || 'http://localhost';
     const port = process.env.REST_PORT || 3000;
 
     const { tick } = req.query;
-    const targetUrl = `http://${host}:${port}/art20?tick=${tick}`;
+    const targetUrl = `${host}:${port}/art20?tick=${tick}`;
 
     try {
         const apiRes = await fetch(targetUrl, {
