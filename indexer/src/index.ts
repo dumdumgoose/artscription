@@ -47,6 +47,27 @@ app.get('/artscriptionDetail', async (req: Request, res: Response) => {
     }
 });
 
+app.get('/galxeCampaign', async (req: Request, res: Response) => {
+    try {
+        const walletAddress = req.query.address;
+
+        if (!walletAddress || walletAddress.length != 42) {
+            return res.status(400).send({
+                error: `invalid wallet address.`
+            });
+        }
+
+        res.send({
+            completed: await service.isGalxeInscriptionTaskCompleted(walletAddress.toString())
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({
+            error: 'Error while getting data'
+        });
+    }
+});
+
 app.get('/balance', async (req: Request, res: Response) => {
     const tick = req.query.tick;
     const address = req.query.address;

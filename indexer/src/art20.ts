@@ -226,7 +226,28 @@ export class Art20Module {
         const queryText = 'SELECT COUNT(*) FROM art20_base_kv WHERE key LIKE $1;';
         const res = await this.pgClient!.query(queryText, [Constants.ARTSCRIPTION_ART20_BALANCE + tick + "#" + '%']);
         return parseInt(res.rows[0].count, 10);
+    }
 
+    async hasMinted(address: string): Promise<boolean> {
+        const ticks = await this.getAllTicks();
+        return new Promise((resolve) => {
+            for (let tick of ticks) {
+                this.balance(tick, address).then((balance) => {
+                    if (balance > 0) {
+                        resolve(true);
+                    }
+                });
+            }
+            resolve(false);
+        });
+    }
+
+    async getAllTicks(): Promise<string[]> {
+        const queryText = 'SELECT key FROM art20_kv;';
+        const ret = await this.pgClient!.query(queryText);
+        return ret.rows.map((row) => {
+            return row.key.replace(Constants.ARTSCRIPTION_ART20, '');
+        });
     }
 
     async getBaseKV(key: string): Promise<any | null> {

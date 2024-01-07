@@ -26,6 +26,10 @@ class Service {
         return detail;
     }
 
+    async isGalxeInscriptionTaskCompleted(walletAddress: string): Promise<boolean> {
+        return await this.art20Module!.hasMinted(walletAddress);
+    }
+
     async balance(tick: string, address: string): Promise<Array<any>> {
 
         let balance = await this.art20Module?.balance(tick.toLocaleLowerCase(), address.toLocaleLowerCase());
