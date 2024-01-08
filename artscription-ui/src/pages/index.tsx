@@ -59,7 +59,7 @@ export default function Home() {
                     </div>
                     <div className="font-mono pt-20">
                         <button onClick={() => scrollToSecondScreen()} className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Learn More</button>
-                        <Link href="/token" className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Mint Now!</Link>
+                        <button onClick={() => window.location.href='/token'} className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Mint Now!</button>
                     </div>
                 </div>
 
