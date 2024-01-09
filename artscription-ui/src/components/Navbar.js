@@ -22,11 +22,11 @@ export default function Navbar() {
             <div className="flex flex-col w-full items-center p-0 mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-lg">
                 <nav className="h-20 w-full flex justify-between items-center">
                     <Link href="/" className="text-lg md:text-xl lg:text-2xl text-slate-500 text-blue-600">ARTSCRIPTION</Link>
-                    <div className="hidden md:flex text-gray-500">
-                        <Link href="/artscriptions" className={`font-bold hover:text-blue-600 text-sm md:text-base cursor-pointer mr-4 ${activeLink === '/artscriptions' ? 'text-blue-600' : ''}`}>Artscriptions</Link>
-                        <Link href="/token" className={`font-bold hover:text-blue-600 text-sm md:text-base cursor-pointer mr-4 ${activeLink === '/token' ? 'text-blue-600' : ''}`}>Token</Link>
-                        <Link href="/marketplace" className={`font-bold hover:text-blue-600 text-sm md:text-base cursor-pointer mr-4 ${activeLink === '/marketplace' ? 'text-blue-600' : ''}`}>Marketplace</Link>
-                    </div>
+                    {/*<div className="hidden md:flex text-gray-500">*/}
+                    {/*    <Link href="/artscriptions" className={`font-bold hover:text-blue-600 text-sm md:text-base cursor-pointer mr-4 ${activeLink === '/artscriptions' ? 'text-blue-600' : ''}`}>Artscriptions</Link>*/}
+                    {/*    <Link href="/token" className={`font-bold hover:text-blue-600 text-sm md:text-base cursor-pointer mr-4 ${activeLink === '/token' ? 'text-blue-600' : ''}`}>Token</Link>*/}
+                    {/*    <Link href="/marketplace" className={`font-bold hover:text-blue-600 text-sm md:text-base cursor-pointer mr-4 ${activeLink === '/marketplace' ? 'text-blue-600' : ''}`}>Marketplace</Link>*/}
+                    {/*</div>*/}
                     <ConnectButton />
                     <button className="md:hidden text-4xl" onClick={() => setIsMenuOpen(!isMenuOpen)}>=</button>
                 </nav>
