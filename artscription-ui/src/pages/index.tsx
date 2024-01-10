@@ -6,7 +6,7 @@ export default function Home() {
     const deployArtscription = {
         "p": "art-20",
         "op": "deploy",
-        "tick": "arts",
+        "tick": "wave1",
         "max": "21000000",
         "lim": "1000"
     };
@@ -14,14 +14,14 @@ export default function Home() {
     const mintArtscription = {
         "p": "art-20",
         "op": "mint",
-        "tick": "arts",
+        "tick": "wave1",
         "amt": "1000"
     };
 
     const transferArtscription = {
         "p": "art-20",
         "op": "transfer",
-        "tick": "arts",
+        "tick": "wave1",
         "amt": "500"
     };
 
