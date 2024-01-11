@@ -26,7 +26,7 @@ export default function Navbar() {
                           className="text-lg md:text-xl lg:text-2xl text-slate-500">ARTSCRIPTION</Link>
                     <div className="hidden md:flex text-gray-500">
                         <Link href="/artscriptions"
-                              className={ `font-bold hover:text-blue-600 text-sm md:text-base cursor-pointer mr-4 ${ activeLink === '/artscriptions' ? 'text-blue-600' : '' }` }>Artscriptions</Link>
+                              className={ `font-bold hover:text-blue-600 text-sm md:text-base cursor-pointer mr-4 ${ activeLink === '/artscriptions' ? 'text-blue-600' : '' }` }>Collections</Link>
                         <Link href="/token"
                               className={ `font-bold hover:text-blue-600 text-sm md:text-base cursor-pointer mr-4 ${ activeLink === '/token' ? 'text-blue-600' : '' }` }>Token</Link>
                         <Link href="/marketplace"

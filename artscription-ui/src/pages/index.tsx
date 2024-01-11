@@ -121,13 +121,11 @@ export default function Home() {
 
                 <div className="h-auto w-full flex flex-col py-8 px-8 mt-4 mb-4 rounded-lg">
                     <div className="h-20 w-full py-8 text-2xl flex flex-row justify-center border-b mb-4">
-                        <p className="text-3xl font-bold text-gray-700">Our trip</p>
+                        <p className="text-3xl font-bold text-gray-700">Our Journey</p>
                     </div>
                     <div
                         className="h-auto w-full text-center flex flex-col py-8 px-8 mt-4 mb-4 border border-gray-200 rounded-lg">
                         <p className="text-3xl font-bold text-gray-700 py-4">About Artscription</p>
-                        <p className="text-xl text-gray-700 font-bold py-2">About Artscription at testnet stage in
-                            Artela Blockchain</p>
                         <p className="text-xl text-gray-700 py-2">Artscription is the first inscription project in
                             Artela Blockchain, utilizing its unique Aspect programming to realize on-chain indexer and
                             unlock composability and programmability for inscription. We have great faith in the
