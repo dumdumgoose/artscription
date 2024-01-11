@@ -8,6 +8,17 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+.link-style {
+  color: black;
+  text-decoration: underline;
+}
+
+.link-style:hover {
+  color: grey;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   /* background: linear-gradient(to bottom,

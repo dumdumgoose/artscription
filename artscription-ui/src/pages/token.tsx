@@ -6,6 +6,7 @@ import { ethers } from 'ethers';
 
 
 import Alert from '../components/Alert';
+import Link from "next/link";
 
 
 
@@ -189,11 +190,20 @@ export default function Token() {
           </div>
           <div>
             <div className="font-semibold whitespace-pre-wrap">Deployer</div>
-            <div className="text-gray-700 whitespace-pre-wrap mt-1">{tokenInfo.owner}</div>
+            <div className="text-gray-700 whitespace-pre-wrap mt-1">
+
+              <Link className='link-style' href={`https://betanet-scan.artela.network/address/${tokenInfo.owner}`}>
+                {tokenInfo.owner}
+              </Link>
+            </div>
           </div>
           <div>
             <div className="font-semibold whitespace-pre-wrap">Deployer Artcription</div>
-            <div className="text-gray-700 whitespace-pre-wrap mt-1 truncate">{tokenInfo.artscriptionId}</div>
+            <div className="text-gray-700 whitespace-pre-wrap mt-1 truncate">
+              <Link className='link-style' href={`https://betanet-scan.artela.network/tx/${tokenInfo.artscriptionId}`}>
+                {tokenInfo.artscriptionId}
+              </Link>
+            </div>
           </div>
           <div>
             <div className="font-semibold whitespace-pre-wrap">Holders</div>
