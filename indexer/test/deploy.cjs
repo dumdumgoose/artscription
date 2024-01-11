@@ -6,7 +6,7 @@ async function f() {
     console.log('start running demo');
 
     const web3 = new Web3('https://testnet-rpc1.artela.network');
-    
+
     const sk = "0x02f92574aecb8203041f9a6b7a392102af37d26cda5e1a1765ad4f27f7df0012";
     const account = web3.eth.accounts.privateKeyToAccount(sk.trim());
     web3.eth.accounts.wallet.add(account.privateKey);
@@ -14,8 +14,8 @@ async function f() {
     let gasPrice = await web3.eth.getGasPrice();
     let chainId = await web3.eth.getChainId();
     let nonce = await web3.eth.getTransactionCount(account.address);
-    const deployScript = 'data:,{"p":"art-20","op": "deploy","tick": "arts","max": "21000000","lim": "1000"}'
-    const mintScript = 'data:,{"p": "art-20","op": "mint","tick": "arts","amt": "1000"}'
+    const deployScript = 'data:,{"p":"art-20","op": "deploy","tick": "wave1","max": "21000000","lim": "1000"}'
+    const mintScript = 'data:,{"p": "art-20","op": "mint","tick": "wave1","amt": "1000"}'
 
     let tx = {
         from: account.address,

@@ -229,17 +229,7 @@ export class Art20Module {
     }
 
     async hasMinted(address: string): Promise<boolean> {
-        const ticks = await this.getAllTicks();
-        return new Promise((resolve) => {
-            for (let tick of ticks) {
-                this.balance(tick, address).then((balance) => {
-                    if (balance > 0) {
-                        resolve(true);
-                    }
-                });
-            }
-            resolve(false);
-        });
+        return (await this.balance('wave1', address)) > 0;
     }
 
     async getAllTicks(): Promise<string[]> {
