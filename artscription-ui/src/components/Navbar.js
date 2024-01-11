@@ -35,7 +35,7 @@ export default function Navbar() {
                     <div className="hidden md:flex text-gray-500">
                         <Link href="https://twitter.com/Art_inscription" className='link-style'><FaTwitter
                           className='link-icon'/></Link>
-                        <Link href="https://t.me/artela_official" className='link-style'><FaTelegram
+                        <Link href="" className='link-disabled'><FaTelegram
                           className='link-icon'/></Link>
                     </div>
                     <ConnectButton/>
