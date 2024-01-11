@@ -140,7 +140,7 @@ export default function Home() {
                             risks to the inscription ecosystem. Also, current mainstream indexer solutions are
                             unscalable, which makes it nearly impossible to support complex application scenarios or
                             interact with the existing decentralized ecosystem.</p>
-                        <p className="text-xl text-gray-700 py-2">That's why we are launching this exciting inscription
+                        <p className="text-xl text-gray-700 py-2">That&apos;s why we are launching this exciting inscription
                             project at this early stage with Artela team, stay tuned and the mint will be open very
                             soon!</p>
                     </div>
@@ -150,14 +150,14 @@ export default function Home() {
                         <p className="text-3xl font-bold text-gray-700 py-4">Inscriptoin x Aspect</p>
                         <p className="text-xl text-gray-700 font-bold py-2">Develop a decentralized, secure,
                             programmable Indexer based on Aspect</p>
-                        <p className="text-xl text-gray-700 py-2">We believe Artela’s unique Aspect design is the right
+                        <p className="text-xl text-gray-700 py-2">We believe Artela&apos;s unique Aspect design is the right
                             answer for the above challenges. The simplest way to put Aspect is the extension modules
                             that can be customized to co-work with EVM for more computation power and new on-chain
                             functionalities. This makes Aspect a perfect container for achieving an on-chain
                             indexer.</p>
                         <p className="text-xl text-gray-700 py-2">Supported by Aspect, the Indexer of Artscritption will
-                            become an extended part of Artela’s network, which will make Artscription the
-                            next-generation “smart” inscription that is well-incentivized, secure, decentralized, and
+                            become an extended part of Artela&apos;s network, which will make Artscription the
+                            next-generation &quot;smart&quot; inscription that is well-incentivized, secure, decentralized, and
                             capable of interoperating with smart contracts and realizing more scenarios.</p>
                     </div>
                 </div>
