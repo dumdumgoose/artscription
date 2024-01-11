@@ -19,6 +19,12 @@
   cursor: pointer;
 }
 
+.link-icon {
+  font-size: 1.5em;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   /* background: linear-gradient(to bottom,
