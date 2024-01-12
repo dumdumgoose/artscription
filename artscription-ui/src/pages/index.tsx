@@ -65,7 +65,7 @@ export default function Home() {
 
                 <div id="secondScreen" className="h-auto w-full flex flex-col px-8 mt-0 mb-4 rounded-lg">
                     <div className="h-20 w-full py-8 text-2xl flex flex-row justify-center border-b mb-4">
-                        <p className="text-3xl font-bold text-gray-700">Art20 Protocol</p>
+                        <p className="text-3xl font-bold text-gray-700">Art20 Standards</p>
                     </div>
                     <div className="h-full w-full grid grid-cols-1 md:grid-cols-3 gap-4">
                         <a className="h-auto p-1 rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-xl">

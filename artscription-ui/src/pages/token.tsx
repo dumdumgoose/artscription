@@ -8,8 +8,6 @@ import { ethers } from 'ethers';
 import Alert from '../components/Alert';
 import Link from "next/link";
 
-
-
 export default function Token() {
   const initDetail: any = {
     "owner": "0x325082679c302d0a23f8d24f289ea29b03108197",
@@ -172,7 +170,7 @@ export default function Token() {
 
       <div className="h-auto w-full flex flex-col border border-gray-200 py-8 px-8 mt-16 mb-4 rounded-lg">
         <div className="h-20 w-full py-8 text-2xl flex flex-row justify-center border-b mb-4">
-          <p className="text-3xl font-bold text-gray-700">ART20: WAVE1</p>
+          <p className="text-3xl font-bold text-gray-700">WAVE1<span className="subscript">art-20</span></p>
         </div>
 
         <div className="h-auto w-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-4 border-b break-all">
