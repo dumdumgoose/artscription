@@ -109,7 +109,7 @@ export default function Token() {
     if (isConnected && address) {
       setClientAddress(address);
     } else {
-      setClientAddress("unconnect");
+      setClientAddress("disconnected");
     }
 
     const fetchData = async () => {
