@@ -1,13 +1,14 @@
 "use strict"
 
 const Web3 = require('@artela/web3');
+const fs = require('fs');
 
 async function f() {
     console.log('start running demo');
 
-    const web3 = new Web3('https://testnet-rpc1.artela.network');
+    const web3 = new Web3('https://betanet-inner1.artela.network');
 
-    const sk = "0x02f92574aecb8203041f9a6b7a392102af37d26cda5e1a1765ad4f27f7df0012";
+    const sk = fs.readFileSync('private.key', 'utf-8').trim();
     const account = web3.eth.accounts.privateKeyToAccount(sk.trim());
     web3.eth.accounts.wallet.add(account.privateKey);
 
@@ -19,7 +20,7 @@ async function f() {
 
     let tx = {
         from: account.address,
-        to: "0x325082679c302d0a23f8d24f289ea29b03108197",
+        to: account.address,
         nonce: nonce++,
         gasPrice,
         gas: 4000000,
@@ -35,7 +36,7 @@ async function f() {
 
     tx = {
         from: account.address,
-        to: "0x325082679c302d0a23f8d24f289ea29b03108197",
+        to: account.address,
         nonce: nonce++,
         gasPrice,
         gas: 4000000,

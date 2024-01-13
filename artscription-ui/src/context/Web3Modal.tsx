@@ -1,23 +1,10 @@
 'use client';
 
 import '@rainbow-me/rainbowkit/styles.css';
-import {
-    Chain,
-    getDefaultWallets,
-    RainbowKitProvider,
-} from '@rainbow-me/rainbowkit';
-import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-
-import {
-    mainnet,
-    polygon,
-    optimism,
-    arbitrum,
-    base,
-    zora,
-} from 'wagmi/chains';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
+import {Chain, getDefaultWallets, RainbowKitProvider,} from '@rainbow-me/rainbowkit';
+import {configureChains, createConfig, WagmiConfig} from 'wagmi';
+import {alchemyProvider} from 'wagmi/providers/alchemy';
+import {publicProvider} from 'wagmi/providers/public';
 
 const artela: Chain = {
     id: 11822,
@@ -31,8 +18,16 @@ const artela: Chain = {
         symbol: 'ART',
     },
     rpcUrls: {
-        public: { http: ['https://betanet-rpc1.artela.network/'] },
-        default: { http: ['https://betanet-rpc1.artela.network/'] },
+        public: { http: [
+                'https://betanet-inner2.artela.network',
+                'https://betanet-inner3.artela.network',
+                'https://betanet-inner4.artela.network'
+            ] },
+        default: { http: [
+                'https://betanet-inner2.artela.network',
+                'https://betanet-inner3.artela.network',
+                'https://betanet-inner4.artela.network'
+            ] },
     },
     blockExplorers: {
         default: { name: 'SnowTrace', url: 'https://betanet-scan.artela.network/' },

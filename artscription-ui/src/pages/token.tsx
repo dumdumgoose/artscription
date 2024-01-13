@@ -10,9 +10,9 @@ import Link from "next/link";
 
 export default function Token() {
   const initDetail: any = {
-    "owner": "0x325082679c302d0a23f8d24f289ea29b03108197",
-    "txHash": "0x2f6b4ce9a9c990956c02e579fa9af7371961b5318e330774300b4dcb987616b0",
-    "artscriptionId": "0x2f6b4ce9a9c990956c02e579fa9af7371961b5318e330774300b4dcb987616b0",
+    "owner": "0xc69990be8c0a98b749f52e293673d073f3df8216",
+    "txHash": "0x1dc1d56f2188c90e83f044a0214b0aa302c0fe013665a439f771b64a4560af6b",
+    "artscriptionId": "0x1dc1d56f2188c90e83f044a0214b0aa302c0fe013665a439f771b64a4560af6b",
     "max": "21000000",
     "lim": "1000",
     "tick": "wave1",

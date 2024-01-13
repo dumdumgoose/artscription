@@ -7,7 +7,7 @@ import { ArtscriptionModule } from './inscription';
 import {Art20Error} from "./errors";
 
 
-const web3 = new Web3(process.env.CHAIN_RPC || 'https://betanet-rpc1.artela.network');
+const web3 = new Web3(process.env.CHAIN_RPC || 'http://127.0.0.1:8545');
 
 class Backend {
     static readonly PG_KEY_LAST_BLOCK_NUMBER: string = "PG_KEY_LAST_BLOCK_NUMBER";
@@ -113,9 +113,23 @@ class Backend {
         }
         console.log(`Backend started with an interval of ${intervalMs} milliseconds.`);
         this.shouldStop = false;
+        let lastSyncedTime = 0;
+        let currentBlock = 0;
+        let lastSyncedBlock = 0;
         while (!this.shouldStop) {
-            await new Promise(resolve => setTimeout(resolve, intervalMs));  // 然后等待指定的时间
-            await this.task();  // 等待任务完成
+            const now = Date.now();
+            if (lastSyncedTime + intervalMs > now && (currentBlock - lastSyncedBlock) <= 3) {
+                await new Promise(resolve => setTimeout(resolve, lastSyncedTime + intervalMs - now));
+            }
+            const res = await this.task();
+            if (res) {
+                currentBlock = res.current;
+                lastSyncedBlock = res.lastSynced;
+            } else {
+                currentBlock = 0;
+                lastSyncedBlock = 0;
+            }
+            lastSyncedTime = now;
         }
     }
 
@@ -146,17 +160,28 @@ class Backend {
         return res.rows[0].value;
     }
 
-    private async task(): Promise<void> {
+    private async task(){
         console.log("\n\nExecuting scheduled task...");
         try {
-            await this.syncBlock();
+            return await this.syncBlock();
         } catch (error) {
             console.error('Executing scheduled task failed', error);
         }
     }
 
     async syncBlock() {
-        let blockNumber = await this.getLastSyncBlockNumber() + 1;
+        let lastSyncedBlock = await this.getLastSyncBlockNumber();
+        const currentBlockNumber = parseInt((await web3.eth.getBlockNumber()).toString(10), 10);
+        if (lastSyncedBlock < 0) {
+            // if block < 0, we start from latest block
+            lastSyncedBlock = currentBlockNumber - 1;
+        } else if (lastSyncedBlock >= currentBlockNumber) {
+            // if block >= currentBlockNumber, we do nothing
+            console.log(`no new block, waiting for next sync...`);
+            return;
+        }
+
+        let blockNumber = lastSyncedBlock + 1;
         console.log(`start syncing block: ${blockNumber}`);
 
         let block = await web3.eth.getBlock(blockNumber, true);
@@ -168,6 +193,8 @@ class Backend {
         if (block) {
             await this.setLastSyncBlockNumber(blockNumber);
         }
+
+        return {current: currentBlockNumber, lastSynced: blockNumber};
     }
 
     async processBlock(block: any) {
