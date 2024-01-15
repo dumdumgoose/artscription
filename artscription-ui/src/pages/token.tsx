@@ -6,31 +6,30 @@ import { ethers } from 'ethers';
 
 
 import Alert from '../components/Alert';
-
-
+import Link from "next/link";
 
 export default function Token() {
   const initDetail: any = {
-    "owner": "0x325082679c302d0a23f8d24f289ea29b03108197",
-    "txHash": "0x2f6b4ce9a9c990956c02e579fa9af7371961b5318e330774300b4dcb987616b0",
-    "artscriptionId": "0x2f6b4ce9a9c990956c02e579fa9af7371961b5318e330774300b4dcb987616b0",
+    "owner": "0xc69990be8c0a98b749f52e293673d073f3df8216",
+    "txHash": "0x1dc1d56f2188c90e83f044a0214b0aa302c0fe013665a439f771b64a4560af6b",
+    "artscriptionId": "0x1dc1d56f2188c90e83f044a0214b0aa302c0fe013665a439f771b64a4560af6b",
     "max": "21000000",
     "lim": "1000",
-    "tick": "arts",
+    "tick": "wave1",
   }
 
-  'data:,{"p": "art-20","op": "transfer","tick": "arts","amt": "1"}'
+  // 'data:,{"p": "art-20","op": "transfer","tick": "arts","amt": "1"}'
   const transferInscriptionJson: any = {
     "p": "art-20",
     "op": "transfer",
-    "tick": "arts",
+    "tick": "wave1",
     "amt": "0"
   }
 
   const mintInscriptionJson: any = {
     "p": "art-20",
     "op": "mint",
-    "tick": "arts",
+    "tick": "wave1",
     "amt": "0"
   }
 
@@ -110,12 +109,12 @@ export default function Token() {
     if (isConnected && address) {
       setClientAddress(address);
     } else {
-      setClientAddress("unconnect");
+      setClientAddress("disconnected");
     }
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api/art20?tick=arts`);
+        const response = await fetch(`/api/art20?tick=wave1`);
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
@@ -132,7 +131,7 @@ export default function Token() {
       const balance = async () => {
         try {
           console.log("updating balance");
-          const response = await fetch(`/api/balance?tick=arts&address=` + address);
+          const response = await fetch(`/api/balance?tick=wave1&address=` + address);
           if (!response.ok) {
             throw new Error(`Error: ${response.statusText}`);
           }
@@ -171,7 +170,7 @@ export default function Token() {
 
       <div className="h-auto w-full flex flex-col border border-gray-200 py-8 px-8 mt-16 mb-4 rounded-lg">
         <div className="h-20 w-full py-8 text-2xl flex flex-row justify-center border-b mb-4">
-          <p className="text-3xl font-bold text-gray-700">ART20: ARTS</p>
+          <p className="text-3xl font-bold text-gray-700">WAVE1<span className="subscript">art-20</span></p>
         </div>
 
         <div className="h-auto w-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-4 border-b break-all">
@@ -189,11 +188,20 @@ export default function Token() {
           </div>
           <div>
             <div className="font-semibold whitespace-pre-wrap">Deployer</div>
-            <div className="text-gray-700 whitespace-pre-wrap mt-1">{tokenInfo.owner}</div>
+            <div className="text-gray-700 whitespace-pre-wrap mt-1">
+
+              <Link className='link-style' href={`https://betanet-scan.artela.network/address/${tokenInfo.owner}`}>
+                {tokenInfo.owner}
+              </Link>
+            </div>
           </div>
           <div>
             <div className="font-semibold whitespace-pre-wrap">Deployer Artcription</div>
-            <div className="text-gray-700 whitespace-pre-wrap mt-1 truncate">{tokenInfo.artscriptionId}</div>
+            <div className="text-gray-700 whitespace-pre-wrap mt-1 truncate">
+              <Link className='link-style' href={`https://betanet-scan.artela.network/tx/${tokenInfo.artscriptionId}`}>
+                {tokenInfo.artscriptionId}
+              </Link>
+            </div>
           </div>
           <div>
             <div className="font-semibold whitespace-pre-wrap">Holders</div>
@@ -205,7 +213,7 @@ export default function Token() {
           <div className="h-auto w-64 p-4 flex flex-col justify-around" >
             <div className="pb-2">
               <div className="font-semibold whitespace-pre-wrap text-center ">Your Balance</div>
-              <div className="text-gray-700 whitespace-pre-wrap mt-1 text-center">{balance} ARTS</div>
+              <div className="text-gray-700 whitespace-pre-wrap mt-1 text-center">{balance} WAVE1</div>
             </div>
             <div className="pb-2">
               <div className="font-semibold whitespace-pre-wrap text-center">Your Wallet</div>
@@ -298,7 +306,7 @@ export default function Token() {
           <div>
             <div className="font-semibold whitespace-pre-wrap text-center">The Indexer backend starts syncing artcription from block height 0 and parses all art-20 data.
             </div>
-            <div className="font-semibold whitespace-pre-wrap text-center">However, the current version only displays the ARTS token, with other tokens to be shown in the next update.
+            <div className="font-semibold whitespace-pre-wrap text-center">However, the current version only displays the WAVE1 token, with other tokens to be shown in the next update.
             </div>
           </div>
         </div>

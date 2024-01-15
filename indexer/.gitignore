@@ -4,6 +4,8 @@ dist/
 build/
 *.tsbuildinfo
 
+private.key
+
 logs
 *.log
 npm-debug.log*

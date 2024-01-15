@@ -7,7 +7,7 @@ const app: express.Application = express();
 
 (async () => {
     await backend.init()
-    backend.start(50);
+    backend.start(200);
     await service.init();
     service.setArtscriptionModule(backend.getArtscriptionModule()!);
     service.setArt20Module(backend.getArt20Module()!);

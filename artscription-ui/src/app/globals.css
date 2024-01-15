@@ -8,6 +8,45 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+/* globals.css */
+/* globals.css */
+.subscript {
+  display: inline-block;
+  background-color: #E6E6E6; /* Adjust the background color to match the gray in your image */
+  color: #000; /* Adjust text color as needed */
+  font-size: 15px; /* Adjust font size to match the example */
+  padding: 2px 8px; /* Adjust padding to create the pill shape */
+  border-radius: 13px; /* Adjust border-radius for a more pill-like shape */
+  font-weight: 500; /* Adjust font weight if necessary */
+  margin-left: 4px; /* Adjust left margin for proper spacing */
+  vertical-align: bottom; /* Adjust vertical alignment as necessary */
+  line-height: 1; /* Ensure the line height does not add extra height */
+  font-family: Arial, sans-serif; /* Adjust font family to match your design */
+}
+
+.link-style {
+  color: black;
+  text-decoration: underline;
+}
+
+.link-disabled {
+  color: grey;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.link-style:hover {
+  color: grey;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link-icon {
+  font-size: 1.5em;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   /* background: linear-gradient(to bottom,

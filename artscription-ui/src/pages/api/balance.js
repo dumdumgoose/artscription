@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
     const { tick, address } = req.query;
     const host = process.env.REST_HOST || 'http://localhost:3000';
-    const targetUrl = `${host}/getLast50Artscription`;
+    const targetUrl = `${host}/balance?tick=${tick}&address=${address}`;
 
     try {
         const apiRes = await fetch(targetUrl, {

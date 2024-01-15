@@ -3,6 +3,7 @@ import '../../app/globals.css';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Navbar from '../../components/Navbar';
+import Link from "next/link";
 
 
 export default function Artscription() {
@@ -48,15 +49,27 @@ export default function Artscription() {
         <div className="md:h-80 w-full md:w-auto ml-0 md:ml-4 mt-4 md:mt-0 px-0 md:px-4 rounded-lg flex flex-col justify-between break-all truncate">
           <div className="pb-2 md:pb-0">
             <div className="text-gray-500 whitespace-pre-wrap">Avascription id</div>
-            <div className="text-gray-700 font-semibold whitespace-pre-wrap mt-1 TRU">{detail.artscription.artscriptionId}</div>
+            <div className="text-gray-700 font-semibold whitespace-pre-wrap mt-1 TRU">
+              <Link className='link-style' href={`https://betanet-scan.artela.network/tx/${detail.artscription.artscriptionId}`}>
+                {detail.artscription.artscriptionId}
+              </Link>
+            </div>
           </div>
           <div className="pb-2 md:pb-0">
             <div className="text-gray-500 whitespace-pre-wrap">Creator</div>
-            <div className="text-gray-700 font-semibold whitespace-pre-wrap mt-1">{detail.artscription.creator}</div>
+            <div className="text-gray-700 font-semibold whitespace-pre-wrap mt-1">
+              <Link className='link-style' href={`https://betanet-scan.artela.network/address/${detail.artscription.creator}`}>
+                {detail.artscription.creator}
+              </Link>
+            </div>
           </div>
           <div className="pb-2 md:pb-0">
             <div className="text-gray-500 whitespace-pre-wrap">Owner</div>
-            <div className="text-gray-700 font-semibold whitespace-pre-wrap mt-1">{detail.artscription.owner}</div>
+            <div className="text-gray-700 font-semibold whitespace-pre-wrap mt-1">
+              <Link className='link-style' href={`https://betanet-scan.artela.network/address/${detail.artscription.owner}`}>
+                {detail.artscription.owner}
+              </Link>
+            </div>
           </div>
           <div className="pb-2 md:pb-0">
             <div className="text-gray-500 whitespace-pre-wrap">Mime type</div>
