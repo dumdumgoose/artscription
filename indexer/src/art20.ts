@@ -230,7 +230,8 @@ export class Art20Module {
 
     async hasMinted(address: string): Promise<boolean> {
         return (await this.balance('wave1', address.toLocaleLowerCase())) > 0
-            || (await this.balance('wave1.1', address.toLocaleLowerCase())) > 0;
+            || (await this.balance('wave1.1', address.toLocaleLowerCase())) > 0
+            || (await this.balance('wave1.2', address.toLocaleLowerCase())) > 0;
     }
 
     async getAllTicks(): Promise<string[]> {
