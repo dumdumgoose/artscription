@@ -13,7 +13,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             <Navbar></Navbar>
             <div className='mt-20'>
-            {children}
+              {children}
             </div>
           </div>
         </Web3Modal>
