@@ -1,5 +1,6 @@
 // pages/token.js
-import '../app/globals.css';
+"use client"
+import './globals.css';
 import React, { useEffect, useState } from 'react';
 import { useAccount, useSendTransaction, usePrepareSendTransaction, useWaitForTransaction } from 'wagmi'
 import { ethers } from 'ethers';

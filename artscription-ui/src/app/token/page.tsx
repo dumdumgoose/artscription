@@ -1,9 +1,8 @@
+import Token from "@/ui/token";
 export default async function Page() {
     return (
         <main>
-            <h1 className={` mb-4 text-xl md:text-2xl`}>
-                token
-            </h1>
+            <Token />
         </main>
     );
 }

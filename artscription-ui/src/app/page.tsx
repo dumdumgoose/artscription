@@ -1,11 +1,8 @@
-
-
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-
+import Home from "@/ui";
 export default function Page() {
   return (
     <div>
-      <div className='h-[500px] bg-green-500'>6666</div>
+      <Home />
     </div>
 
   );
