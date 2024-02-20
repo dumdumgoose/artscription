@@ -1,47 +1,56 @@
+'use client'
 import Image from "next/image";
 import LayerInscription from "@/public/layerInscription.png"
 import Card from "./components/Card";
+import Link from 'next/link';
+import React, { useRef } from 'react';
 export default function Home() {
+    const secondScreenRef = useRef<HTMLDivElement>(null);
+    const scrollToSecondScreen = (): void => {
+        const navbarHeight: number = 65;
 
+        if (secondScreenRef.current) {
+            const secondScreenPosition = secondScreenRef.current.offsetTop;
+            window.scrollTo({
+                top: secondScreenPosition - navbarHeight, // 减去Navbar的高度以避免遮挡
+                behavior: 'smooth',
+            });
+        }
+    };
     return (
         <main>
             <div className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
                 <div id="firstScreen" className="flex min-h-screen flex-col items-center justify-center px-4">
                     <div
                         className="relative flex flex-col place-items-center text-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-                        <p className="text-[48px] text-blod">Inscription in Artela</p>
-                        <p className="text-[24px] pt-10">Support decentralized applications based on the indexer ledger architecture</p>
+                        <p className="text-[48px] text-blod">Layer Inscription</p>
+                        <p className="text-[24px] pt-10">Offload execution workload from Layer 1 and provide the productive execution
+                            sublayer for inscription-based decentralized applications.</p>
                     </div>
                     <div className="font-mono pt-20">
-                        <button className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Learn More</button>
-                        <button className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Mint Now!</button>
+                        <button onClick={scrollToSecondScreen} className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Learn More</button>
+                        <Link
+                            href="/token">
+                            <button className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Mint Now!</button>
+                        </Link>
                         {/* <button onClick={() => scrollToSecondScreen()} className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Learn More</button>
                         <button onClick={() => window.location.href='/token'} className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Mint Now!</button> */}
                     </div>
                 </div>
-                {/* <h1 className="text-4xl font-bold mb-12 mt-12 w-3/5">Layer Inscription</h1>
-                <div className="flex flex-col items-center justify-center w-4/6 bg-white p-4">
-                    <h1 className="text-3xl font-bold text-gray-700 mb-4">Layer Inscription</h1>
-                    <p className="w-4/5 text-md">
-                        Offload execution workload from Layer 1 and provide the productive execution
-                        sublayer for inscription-based decentralized applications.
-                    </p>
-                    <hr className="w-full border-t mt-12 mb-12" />
-                    <Image src={LayerInscription}
-                        alt="layerInsription"
-                        width={1000}
-                        height={760}
-                    />
-                </div> */}
-
-                <div className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
+                <Image
+                    src={LayerInscription}
+                    alt="layerInsription"
+                    width={1000}
+                    height={760}
+                />
+                <div ref={secondScreenRef} className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
                     <div className="flex flex-col items-center justify-center w-4/6 bg-white p-4">
                         <h1 className="text-3xl font-bold text-gray-700 mb-4">Features</h1>
                         <p className="w-4/5 text-md text-center">
                             Make Inscription productive: decentralized, secure, programmable
                         </p>
                         <hr className="w-full border-t mt-4 mb-4" />
-                        <div className="flex flex-row justify-center gap-8">
+                        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8">
                             <Card className="flex-1" title="Shared Security ">
                                 <div className="pl-4 pr-2 flex flex-col gap-4 text-md">
                                     <p>Indexers stake $ARTS in Layer 1 to offer layer inscription security. </p>
@@ -62,6 +71,7 @@ export default function Home() {
                                 </div>
                             </Card>
                         </div>
+
                     </div>
                 </div>
 
@@ -93,7 +103,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
+                {/* <div className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
                     <div className="flex flex-col items-center justify-center w-4/6 bg-white p-4">
                         <h1 className="text-3xl font-bold text-gray-700 mb-4">
                             Roadmap
@@ -151,7 +161,7 @@ export default function Home() {
                         <div className="bg-custom-blue h-5 w-5 flex flex-col items-center justify-center">D</div>
                     </div>
                     artela 和铭文架构的出现使得我们终于可以有机会去突破区块链不可能三角的限制。这就是我们推出Artscription这个项目的原因，在Artscription，我们结合了Artela 和inscription的技术特点。利用了artela的可拓展网络的特性，允许开发者利用layer inscription的架构，去构建应用级别的共识网络，在保留与artela l1可组合性的基础之上，允许开发者自由的在去中心化，安全性，可拓展性这三者之间做选择，最大程度解放去中心化应用的价值与生产力
-                </div>
+                </div> */}
 
             </div>
         </main>
