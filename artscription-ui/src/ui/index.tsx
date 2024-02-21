@@ -37,46 +37,53 @@ export default function Home() {
                         <button onClick={() => window.location.href='/token'} className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Mint Now!</button> */}
                     </div>
                 </div>
-                <Image
-                    src={LayerInscription}
-                    alt="layerInsription"
-                    width={1000}
-                    height={760}
-                />
-                <div ref={secondScreenRef} className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
-                    <div className="flex flex-col items-center justify-center w-4/6 bg-white p-4">
+                <div ref={secondScreenRef}>
+                    <Image
+                        src={LayerInscription}
+                        alt="layerInsription"
+                        width={1000}
+                        height={760}
+                    />
+                </div>
+                <div className="flex flex-col items-center px-4 md:w-[1200px] m-auto">
+                    <div className="flex flex-col items-center justify-center  bg-white p-4">
                         <h1 className="text-3xl font-bold text-gray-700 mb-4">Features</h1>
                         <p className="w-4/5 text-md text-center">
                             Make Inscription productive: decentralized, secure, programmable
                         </p>
                         <hr className="w-full border-t mt-4 mb-4" />
-                        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8">
-                            <Card className="flex-1" title="Shared Security ">
-                                <div className="pl-4 pr-2 flex flex-col gap-4 text-md">
-                                    <p>Indexers stake $ARTS in Layer 1 to offer layer inscription security. </p>
-                                    <p>Indexers periodically synchronize world states.</p>
-                                    <p>Slashing happens if the indexer offers the wrong state.</p>
-                                </div>
-                            </Card>
-                            <Card className="flex-1" title="Smart Inscription">
-                                <div className="pl-4 pr-2 flex flex-col gap-4 text-md">
-                                    <p>Inscriptions trigger smart contracts execution in Layer Inscription.</p>
-                                    <p>Inscriptioin contracts is no longer limited to the traditional EVM execution environment, it can customize a more flexible execution environment.</p>
-                                </div>
-                            </Card>
-                            <Card className="flex-1" title="Interoperability">
-                                <div className="pl-4 pr-2 flex flex-col gap-4 text-md">
-                                    <p>An async communication channel between Layer 1 smart contracts and Layer inscription contracts.</p>
-                                    <p>Keep composability between Layer 1 dApps and inscription based dApps</p>
-                                </div>
-                            </Card>
+                        <div className="flex flex-col sm:flex-row justify-center gap-20 sm:gap-20" >
+                            <div className="flex flex-col flex-1">
+                                <Card title="Shared Security">
+                                    <div className="pl-4 pr-2 flex flex-col gap-4 text-md flex-grow">
+                                        <p>Indexers stake $ARTS in Layer 1 to offer layer inscription security.</p>
+                                        <p>Indexers periodically synchronize world states.</p>
+                                        <p>Slashing happens if the indexer offers the wrong state.</p>
+                                    </div>
+                                </Card>
+                            </div>
+                            <div className="flex flex-col flex-1">
+                                <Card title="Smart Inscription">
+                                    <div className="pl-4 pr-2 flex flex-col gap-4 text-md flex-grow">
+                                        <p>Inscriptions trigger smart contracts execution in Layer Inscription.</p>
+                                        <p>Inscription contracts are no longer limited to the traditional EVM execution environment, they can customize a more flexible execution environment.</p>
+                                    </div>
+                                </Card>
+                            </div>
+                            <div className="flex flex-col flex-1">
+                                <Card title="Interoperability">
+                                    <div className="pl-4 pr-2 flex flex-col gap-4 text-md flex-grow">
+                                        <p>An async communication channel between Layer 1 smart contracts and Layer inscription contracts.</p>
+                                        <p>Keep composability between Layer 1 dApps and inscription based dApps</p>
+                                    </div>
+                                </Card>
+                            </div>
                         </div>
-
                     </div>
                 </div>
 
                 <div className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
-                    <div className="flex flex-col items-center justify-center w-4/6 bg-white p-4">
+                    <div className="flex flex-col items-center justify-center bg-white p-4">
                         <h1 className="text-3xl font-bold text-gray-700 mb-4">
                             Layer Inscription Philosophy
                         </h1>
