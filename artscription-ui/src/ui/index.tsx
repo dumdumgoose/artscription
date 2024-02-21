@@ -7,7 +7,7 @@ import React, { useRef } from 'react';
 export default function Home() {
     const secondScreenRef = useRef<HTMLDivElement>(null);
     const scrollToSecondScreen = (): void => {
-        const navbarHeight: number = 65;
+        const navbarHeight: number = 85;
 
         if (secondScreenRef.current) {
             const secondScreenPosition = secondScreenRef.current.offsetTop;
@@ -19,8 +19,8 @@ export default function Home() {
     };
     return (
         <main>
-            <div className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
-                <div id="firstScreen" className="flex min-h-screen flex-col items-center justify-center px-4">
+            <div className="flex flex-col gap-12 items-center p-4 md:w-[1200px] m-auto overflow-hidden">
+                <div className="flex min-h-screen flex-col items-center justify-center px-0">
                     <div
                         className="relative flex flex-col place-items-center text-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
                         <p className="text-[48px] text-blod">Layer Inscription</p>
@@ -33,8 +33,6 @@ export default function Home() {
                             href="/token">
                             <button className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Mint Now!</button>
                         </Link>
-                        {/* <button onClick={() => scrollToSecondScreen()} className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Learn More</button>
-                        <button onClick={() => window.location.href='/token'} className="bg-blue-500 text-white text-[18px] cursor-pointer ml-8 hover:bg-blue-700 duration-200 rounded-lg px-4 py-2">Mint Now!</button> */}
                     </div>
                 </div>
                 <div ref={secondScreenRef}>
@@ -52,7 +50,7 @@ export default function Home() {
                             Make Inscription productive: decentralized, secure, programmable
                         </p>
                         <hr className="w-full border-t mt-4 mb-4" />
-                        <div className="flex flex-col sm:flex-row justify-center gap-20 sm:gap-20" >
+                        <div className="flex flex-col sm:flex-row justify-center gap-12 sm:gap-20" >
                             <div className="flex flex-col flex-1">
                                 <Card title="Shared Security">
                                     <div className="pl-4 pr-2 flex flex-col gap-4 text-md flex-grow">
@@ -82,9 +80,9 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
+                <div className="flex flex-col mt-16 items-center p-0 md:w-[1200px] m-auto">
                     <div className="flex flex-col items-center justify-center bg-white p-4">
-                        <h1 className="text-3xl font-bold text-gray-700 mb-4">
+                        <h1 className="text-3xl font-bold text-gray-700 mb-4 text-center">
                             Layer Inscription Philosophy
                         </h1>
                         <p className="w-4/5 text-md text-center">
@@ -109,7 +107,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-
+                <div className="mt-20"></div>
                 {/* <div className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
                     <div className="flex flex-col items-center justify-center w-4/6 bg-white p-4">
                         <h1 className="text-3xl font-bold text-gray-700 mb-4">
