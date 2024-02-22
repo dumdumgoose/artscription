@@ -5,5 +5,6 @@ export class Constants {
 
     static readonly ARTSCRIPTION_ART20: string = "ARTSCRIPTION_ART20#";
     static readonly ARTSCRIPTION_ART20_BALANCE: string = "ARTSCRIPTION_ART20_BALANCE#";
+    static readonly ARTSCRIPTION_ART20_AIRDROP: string = "ARTSCRIPTION_ART20_AIRDROP#";
     static readonly ARTSCRIPTION_ART20_SUPPLY: string = "ARTSCRIPTION_ART20_SUPPLY#";
 }

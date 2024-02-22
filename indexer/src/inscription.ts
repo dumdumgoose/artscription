@@ -180,7 +180,6 @@ export class Artscription {
 
     blockNumber = 0;
     txIndex = 0;
-    // artscriptionNumber: number = 0;
 
     constructor(block: any, tx: any) {
         this.originTx = tx;

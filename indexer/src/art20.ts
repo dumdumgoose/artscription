@@ -1,7 +1,9 @@
-import { PoolClient } from 'pg';
-import { Artscription } from './inscription';
-import { Constants } from './constants';
-import { Art20Error } from "./errors";
+import {PoolClient} from 'pg';
+import {Artscription} from './inscription';
+import {Constants} from './constants';
+import {Art20Error} from "./errors";
+import Web3 from "web3";
+import {TransactionFactory} from '@ethereumjs/tx';
 
 export class Art20Module {
 
@@ -67,7 +69,10 @@ export class Art20Module {
     async deploy(artscription: Artscription): Promise<void> {
         console.log("do deploy:", artscription.inscription.tick);
 
-        //{"p":"art-20","op": "deploy","tick": "arts","max": "21000000","lim": "1000"}
+        // {"p":"art-20","op": "deploy","tick": "arts","max": "21000000","lim": "1000",
+        // "v": {"vms": ["pow", "airdrop"],
+        // "pow": {"difficulty" : "1"}}}
+        // difficulty is a decimal, it indicates the number of leading zeroes in the transaction hash
         if (await this.art20(artscription.inscription.tick) !== null) {
             throw new Art20Error("art20 " + artscription.inscription.tick + " has already been deployed");
         }
@@ -80,7 +85,6 @@ export class Art20Module {
             inscription: JSON.stringify(artscription.inscription),
             artscriptionId: artscription.artscriptionId,
             txHash: artscription.txHash,
-            // artscriptionNumber: artscription.artscriptionNumber.toString(),
         };
 
         await this.saveArt20(value);
@@ -91,7 +95,9 @@ export class Art20Module {
         //     "p": "art-20",
         //     "op": "mint",
         //     "tick": "arts",
-        //     "amt": "1000"
+        //     "amt": "1000",
+        //     "v": { "vm": "pow", "n": "0x123..." }
+        //     "v": { "vm": "airdrop", "sig": "0xaaaa...", "n": "1" }
         // }
 
         console.log("do mint:", artscription.owner + "," + artscription.inscription.tick + "," + artscription.inscription.amt);
@@ -100,6 +106,76 @@ export class Art20Module {
 
         if (!art20) {
             throw new Art20Error("art20 " + artscription.inscription.tick + " haven't been deployed");
+        }
+
+        const baseKVUpdates = [];
+
+        const inscriptionMeta = JSON.parse(art20.inscription);
+        if (inscriptionMeta.v) {
+            if (inscriptionMeta.v.vms) {
+                // check validation methods
+                let isValid = false;
+                for (let vm of inscriptionMeta.v.vms) {
+                    if (vm === artscription.inscription.v.vm && vm === "pow") {
+                        // check pow
+                        const powDifficulty = inscriptionMeta.v.pow.difficulty;
+                        const msgHash = this.getMsgHash(artscription.originTx);
+                        console.log("checking mint with pow, msgHash:", msgHash, "powDifficulty:", powDifficulty);
+                        isValid = msgHash.startsWith("0".repeat(Number.parseInt(powDifficulty, 10)));
+                        break;
+                    } else if (vm === artscription.inscription.v.vm && vm === "airdrop") {
+                        console.log(inscriptionMeta);
+
+                        // check invitation
+                        const sender = artscription.creator;
+                        const nonce = artscription.inscription.v.n;
+                        const owner = artscription.owner;
+                        const creator = art20.owner.toLocaleLowerCase();
+
+                        // validate whether sig is from the inscription creator, sig is signed for the hash of the following info:
+                        // p, op, tick, amt, v.vm, v.n
+                        const sig = artscription.inscription.v.sig;
+
+                        // we need to calculate keccak hash of the following info:
+                        // p, op, tick, amt, v.vm, v.n
+                        const inscriptionSignData = [
+                            artscription.inscription.p,
+                            artscription.inscription.op,
+                            artscription.inscription.tick,
+                            artscription.inscription.amt,
+                            artscription.inscription.v.vm,
+                            artscription.inscription.v.n
+                        ];
+
+                        // validate signature
+                        const web3 = new Web3();
+                        const recoveredAddress = web3.eth.accounts.recover(JSON.stringify(inscriptionSignData), sig);
+
+                        console.log("checking mint with airdrop, sender:", sender, "nonce:", nonce, "owner:", owner, "creator:", creator, "recoveredAddress:", recoveredAddress);
+
+                        if (recoveredAddress && recoveredAddress.toLocaleLowerCase() === creator) {
+                            // query from base kv for the airdrop
+                            const airdropKey = this.airdropKey(artscription.inscription.tick, sender, nonce);
+                            const airdrop = await this.getBaseKV(airdropKey);
+                            isValid = airdrop === null || airdrop.owner === owner.toLocaleLowerCase();
+                            if (isValid) {
+                                baseKVUpdates.push({
+                                    key: airdropKey,
+                                    value: {
+                                        owner: owner.toLocaleLowerCase()
+                                    },
+                                    blockNumber: artscription.blockNumber,
+                                    txIndex: artscription.txIndex
+                                });
+                            }
+                            break;
+                        }
+                    }
+                }
+                if (!isValid) {
+                    throw new Art20Error("invalid mint inscription, validation failed.");
+                }
+            }
         }
 
         let amtStr: string = artscription.inscription.amt;
@@ -127,12 +203,39 @@ export class Art20Module {
 
         balance += amt;
 
-        const { blockNumber, txIndex } = artscription;
+        const {blockNumber, txIndex} = artscription;
 
-        await this.setBaseKVBatch([
-            { key: this.balanceKey(artscription.inscription.tick, artscription.owner), value: balance.toString(), blockNumber, txIndex },
-            { key: Constants.ARTSCRIPTION_ART20_SUPPLY + artscription.inscription.tick, value: supply.toString(), blockNumber, txIndex },
-        ]);
+        baseKVUpdates.push(
+            {
+                key: this.balanceKey(artscription.inscription.tick, artscription.owner),
+                value: balance.toString(),
+                blockNumber,
+                txIndex
+            }
+        );
+        baseKVUpdates.push(
+            {
+                key: Constants.ARTSCRIPTION_ART20_SUPPLY + artscription.inscription.tick,
+                value: supply.toString(),
+                blockNumber,
+                txIndex
+            }
+        );
+
+        await this.setBaseKVBatch(baseKVUpdates);
+    }
+
+    getMsgHash(tx: any): string {
+        const normalizedTx = { gasLimit: tx.gas, data: tx.input, ...tx};
+
+        for (const key in normalizedTx) {
+            if ((typeof normalizedTx[key]) === 'bigint') {
+                normalizedTx[key] = Number(normalizedTx[key].toString());
+            }
+        }
+
+        const ethTx = TransactionFactory.fromTxData(normalizedTx);
+        return ethTx.getMessageToSign(true).toString('hex');
     }
 
     async transfer(artscription: Artscription): Promise<void> {
@@ -173,7 +276,7 @@ export class Art20Module {
         let receiverBalance = await this.balance(artscription.inscription.tick, artscription.owner);
         receiverBalance += amt;
 
-        const { blockNumber, txIndex } = artscription;
+        const {blockNumber, txIndex} = artscription;
 
         await this.setBaseKVBatch(
             [
@@ -266,7 +369,6 @@ export class Art20Module {
     }
 
     async setBaseKVBatch(kvs: Array<{ key: string, value: any, blockNumber: number, txIndex: number }>): Promise<void> {
-
         try {
             await this.pgClient!.query('BEGIN');
 
@@ -284,6 +386,10 @@ export class Art20Module {
     balanceKey(tick: string, address: string) {
         return Constants.ARTSCRIPTION_ART20_BALANCE + tick + "#" + address;
     }
+
+    airdropKey(tick: string, address: string, nonce: string) {
+        return Constants.ARTSCRIPTION_ART20_AIRDROP + tick + "#" + address + "#" + nonce;
+    }
 }
 
 export interface Art20 {
@@ -294,5 +400,4 @@ export interface Art20 {
     artscriptionId: string;
     inscription: string;
     txHash: string;
-    // artscriptionNumber?: string;
 }
