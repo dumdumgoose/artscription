@@ -107,7 +107,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="mt-20"></div>
+                <div className="mt-20 h-40"></div>
                 {/* <div className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
                     <div className="flex flex-col items-center justify-center w-4/6 bg-white p-4">
                         <h1 className="text-3xl font-bold text-gray-700 mb-4">
