@@ -1,13 +1,12 @@
 'use client'
-import Image from "next/image";
-import LayerInscription from "@/public/layerInscription.png"
+import SketchMap from "./components/SketchMap";
 import Card from "./components/Card";
 import Link from 'next/link';
 import React, { useRef } from 'react';
 export default function Home() {
     const secondScreenRef = useRef<HTMLDivElement>(null);
     const scrollToSecondScreen = (): void => {
-        const navbarHeight: number = 85;
+        const navbarHeight: number = 105;
 
         if (secondScreenRef.current) {
             const secondScreenPosition = secondScreenRef.current.offsetTop;
@@ -36,23 +35,19 @@ export default function Home() {
                     </div>
                 </div>
                 <div ref={secondScreenRef}>
-                    <Image
-                        src={LayerInscription}
-                        alt="layerInsription"
-                        width={1000}
-                        height={760}
-                    />
+                    <SketchMap />
                 </div>
+
                 <div className="flex flex-col items-center px-4 md:w-[1200px] m-auto">
                     <div className="flex flex-col items-center justify-center  bg-white p-4">
                         <h1 className="text-3xl font-bold text-gray-700 mb-4">Features</h1>
                         <p className="w-4/5 text-md text-center">
                             Make Inscription productive: decentralized, secure, programmable
                         </p>
-                        <hr className="w-full border-t mt-4 mb-4" />
+                        <hr className="w-full border-t mt-4 mb-8" />
                         <div className="flex flex-col sm:flex-row justify-center gap-12 sm:gap-20" >
                             <div className="flex flex-col flex-1">
-                                <Card title="Shared Security">
+                                <Card disabled={true} title="Shared Security" className="flex flex-col flex-grow">
                                     <div className="pl-4 pr-2 flex flex-col gap-4 text-md flex-grow">
                                         <p>Indexers stake $ARTS in Layer 1 to offer layer inscription security.</p>
                                         <p>Indexers periodically synchronize world states.</p>
@@ -61,7 +56,7 @@ export default function Home() {
                                 </Card>
                             </div>
                             <div className="flex flex-col flex-1">
-                                <Card title="Smart Inscription">
+                                <Card disabled={true} title="Smart Inscription" className="flex flex-col flex-grow">
                                     <div className="pl-4 pr-2 flex flex-col gap-4 text-md flex-grow">
                                         <p>Inscriptions trigger smart contracts execution in Layer Inscription.</p>
                                         <p>Inscription contracts are no longer limited to the traditional EVM execution environment, they can customize a more flexible execution environment.</p>
@@ -69,7 +64,7 @@ export default function Home() {
                                 </Card>
                             </div>
                             <div className="flex flex-col flex-1">
-                                <Card title="Interoperability">
+                                <Card disabled={true} title="Interoperability" className="flex flex-col flex-grow">
                                     <div className="pl-4 pr-2 flex flex-col gap-4 text-md flex-grow">
                                         <p>An async communication channel between Layer 1 smart contracts and Layer inscription contracts.</p>
                                         <p>Keep composability between Layer 1 dApps and inscription based dApps</p>
@@ -88,7 +83,7 @@ export default function Home() {
                         <p className="w-4/5 text-md text-center">
                             Layer Inscription separates “application-level consensus” from Layer 1 consensus to rebalance the blockchain trilemma
                         </p>
-                        <hr className="w-full border-t mt-4 mb-4" />
+                        <hr className="w-full border-t mt-4 mb-8" />
                         <div className="flex flex-col justify-center gap-8">
                             <Card className="w-full" title="Application-level Consensus">
                                 <div className="pl-4 pr-2 flex flex-col gap-4 text-md">
@@ -107,16 +102,15 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="mt-20 h-40"></div>
-                {/* <div className="flex flex-col items-center p-0 md:w-[1200px] m-auto">
-                    <div className="flex flex-col items-center justify-center w-4/6 bg-white p-4">
+                <div className="flex flex-col mt-16 items-center p-0 md:w-[1200px] m-auto">
+                    <div className="flex flex-col items-center justify-center bg-white p-4">
                         <h1 className="text-3xl font-bold text-gray-700 mb-4">
                             Roadmap
                         </h1>
-                        <p className="w-4/5 text-md text-center">
+                        <p className=" text-md text-center">
                             Keeping pace with Artela network
                         </p>
-                        <hr className="w-full border-t mt-4 mb-4" />
+                        <hr className="w-full border-t mt-4 mb-8" />
                         <div className="flex flex-col justify-center gap-8">
                             <Card className="w-full" title="Testnet (Living)">
                                 <div className="pl-4 pr-2 flex flex-col gap-4 text-md">
@@ -152,13 +146,13 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="w-4/6 pl-4 pr-2 my-4" >
+                <div className="pl-4 pr-2 my-4" >
                     The blockchain Trilemma, that is security, decentralization,and scalability has been a persistent challenge that the industry has been striving to address. For traditional smart contract paradigms, developers could only default to the choice of the underlying blockchain systems and are not capable to extend or modify it. However, we believe that there is no one-size-fits-all answer to the blockchain Trilemma. Instead, developers should have the autonomy to choose and balance these three key attributes according to their needs, allowing them the freedom to construct their ideal dApps.
                 </div>
-                <div className="w-4/6 pl-4 pr-2 my-4" >
+                <div className="pl-4 pr-2 my-4" >
                     The emergence of Artela and the Inscription architecture gives us the opportunity to break through the limitations of the blockchain Trilemma. This is why we represented the Artscription project. In Artscription, we combine the features of Artela blockchain and Inscription. Leveraging Artela&apos;s extensible network capabilities, developers are allowed to use the Layer Inscription architecture to realize application-level consensus. While preserving composability with Artela L1 ecosystem, developers have the autonomy to make their own choice and adjustment among decentralization, security, and scalability, maximizing the value and productivity of decentralized applications.
                 </div>
-                <div className="w-4/6 pl-4 pr-2 my-4" >
+                {/* <div className="w-4/6 pl-4 pr-2 my-4" >
                     一直以来，关于去中心化，安全性，可拓展性的区块链不可能三角一直是行业不断努力去解决的挑战，对于传统的智能合约范式而言，去中心化应用的开发者只能默认选择底层区块链系统的配置，而我们认为，区块链的不可能三角没有标准答案，而是应该允许开发者有足够的自主权，根据自己的需求，去自由的取舍这三个关键属性，来搭建自己理想中的应用.
                 </div>
                 <div className="w-4/6 pl-4 pr-2 my-4" >
@@ -167,6 +161,8 @@ export default function Home() {
                     </div>
                     artela 和铭文架构的出现使得我们终于可以有机会去突破区块链不可能三角的限制。这就是我们推出Artscription这个项目的原因，在Artscription，我们结合了Artela 和inscription的技术特点。利用了artela的可拓展网络的特性，允许开发者利用layer inscription的架构，去构建应用级别的共识网络，在保留与artela l1可组合性的基础之上，允许开发者自由的在去中心化，安全性，可拓展性这三者之间做选择，最大程度解放去中心化应用的价值与生产力
                 </div> */}
+
+                <div className="mt-20 h-40"></div>
 
             </div>
         </main>
